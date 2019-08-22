@@ -6,7 +6,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"bitbucket.org/shu_go/gli"
+	"github.com/shu-go/gli"
 )
 
 var (
