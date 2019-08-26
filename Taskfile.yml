@@ -1,0 +1,28 @@
+# https://taskfile.dev
+
+version: '2'
+
+tasks:
+  default:
+    deps: [ build ]
+
+  dist:
+    deps: [ default ]
+    cmds:
+      - goxz -pv {{.VERSION}} -os=windows -arch=386,amd64
+    vars:
+      VERSION: {sh: caffeine version}
+
+  test:
+    cmds:
+      - go test ./...
+
+  bench:
+    cmds:
+      - go test -bench . -benchmem ./...
+
+  build:
+    cmds:
+      - go build -ldflags "-s -w"
+
+#  vim: set et ft=yaml sts=2 sw=2 ts=2 tw=0 : 
