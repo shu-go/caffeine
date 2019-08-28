@@ -55,7 +55,7 @@ func main() {
 	app := gli.NewWith(&globalCmd{})
 	app.Name = "caffeine"
 	app.Desc = "keep waking Windows up"
-	app.Version = "0.1.0"
+	app.Version = "1.0.0"
 	app.Usage = "caffeine"
 	app.Copyright = "(C) 2019 Shuhei Kubota"
 	app.Run(os.Args)
