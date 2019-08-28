@@ -1,0 +1,21 @@
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-go/ for more details
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.13rc1
+
+    working_directory: /go/src/github.com/shu-go/caffeine
+
+    environment:
+      - GOPATH: /home/circleci/go
+
+    steps:
+      - run: echo 'export PATH=${GOPATH}/bin/:${PATH}' >> $BASH_ENV
+      - checkout
+      - run: go build ./...
+      - run: go get -u  github.com/Songmu/goxz/cmd/goxz  github.com/tcnksm/ghr
+      - run: goxz -pv $(./caffeine version)  -os "windows"  -arch="386 amd64"
+      - run: ghr -t $GITHUB_TOKEN  -u shu-go  --replace $(./caffeine version)  goxz/
