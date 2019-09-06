@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"os/signal"
+	"path/filepath"
+	"strings"
 	"syscall"
 
 	"github.com/shu-go/gli"
@@ -23,9 +25,36 @@ const (
 )
 
 type globalCmd struct {
+	DoRun runCmd `cli:"run,r"`
+
+	Dest string `cli:"dest,d=PATH_TO_LNK"`
 }
 
-func (c globalCmd) Run() error {
+func (c *globalCmd) Before(args []string) {
+	if len(args) > 0 && c.Dest == "" {
+		if dir, err := os.Getwd(); err == nil {
+			c.Dest = dir
+		}
+	}
+}
+
+func (c globalCmd) Run(args []string) error {
+	if len(args) == 0 {
+		return c.runStandalone()
+	}
+
+	src, err := os.Executable()
+	if err != nil {
+		return fmt.Errorf("creating shortcut, executable: %v", err)
+	}
+	tmpargs := append([]string{"run"}, args...)
+	arg := strings.Join(tmpargs, " ")
+	dst := filepath.Join(c.Dest, filepath.Base(args[0])) + ".lnk"
+
+	return createShortcut(src, arg, dst, 7, args[0]+",0")
+}
+
+func (c globalCmd) runStandalone() error {
 	signalChan := make(chan os.Signal, 1)
 	signal.Notify(signalChan, os.Interrupt)
 
