@@ -7,9 +7,19 @@ import (
 	"path/filepath"
 	"strings"
 	"syscall"
+	"time"
 
 	"github.com/shu-go/gli"
 )
+
+// Version is app version
+var Version string
+
+func init() {
+	if Version == "" {
+		Version = "dev-" + time.Now().Format("20060102")
+	}
+}
 
 var (
 	kernel32                = syscall.NewLazyDLL("kernel32.dll")
@@ -84,7 +94,7 @@ func main() {
 	app := gli.NewWith(&globalCmd{})
 	app.Name = "caffeine"
 	app.Desc = "keep waking Windows up"
-	app.Version = "1.0.0"
+	app.Version = Version
 	app.Usage = "caffeine"
 	app.Copyright = "(C) 2019 Shuhei Kubota"
 	app.Run(os.Args)
