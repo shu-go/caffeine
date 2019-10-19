@@ -57,11 +57,10 @@ func (c globalCmd) Run(args []string) error {
 	if err != nil {
 		return fmt.Errorf("creating shortcut, executable: %v", err)
 	}
-	tmpargs := append([]string{"run"}, args...)
-	arg := strings.Join(tmpargs, " ")
-	dst := filepath.Join(c.Dest, filepath.Base(args[0])) + ".lnk"
+	target := strings.Join(args, " ")
+	dst := filepath.Join(c.Dest, filepath.Base(target)) + ".lnk"
 
-	return createShortcut(src, arg, dst, 7, args[0]+",0")
+	return createShortcut(src, `run "`+target+`"`, dst, 7, target+",0")
 }
 
 func (c globalCmd) runStandalone() error {
