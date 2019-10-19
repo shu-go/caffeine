@@ -37,13 +37,13 @@ const (
 type globalCmd struct {
 	DoRun runCmd `cli:"run,r"`
 
-	Dest string `cli:"dest,d=PATH_TO_LNK"`
+	Dest string `cli:"dest,d=PATH_TO_LNK (default: dir of caffeine.exe)"`
 }
 
 func (c *globalCmd) Before(args []string) {
 	if len(args) > 0 && c.Dest == "" {
-		if dir, err := os.Getwd(); err == nil {
-			c.Dest = dir
+		if exepath, err := os.Executable(); err == nil {
+			c.Dest = filepath.Dir(exepath)
 		}
 	}
 }
