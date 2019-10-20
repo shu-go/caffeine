@@ -6,5 +6,7 @@ github.com/shu-go/cliparser v0.0.0-20190822025044-17b54d2ae1aa h1:/o4k5mrlZXF78Q
 github.com/shu-go/cliparser v0.0.0-20190822025044-17b54d2ae1aa/go.mod h1:b89EpZSowgrnN/iRGjwCHlRcIMMQjOGm3NmffyFpF9M=
 github.com/shu-go/gli v0.0.0-20190822024321-4648c9cce7c7 h1:cQfiYQXw1Z8wjQ+xRN2+oUAapl5hzTbfVnUJQSzGvHs=
 github.com/shu-go/gli v0.0.0-20190822024321-4648c9cce7c7/go.mod h1:PXSm+hlDjMRG+li/7UCutKkpvvSPClL2GLdmtKLT38U=
-github.com/shu-go/gotwant v0.0.0-20190822031422-724391433f13 h1:ny9pVZ7fzuKapDWhfcQwVD5XtO/WUqYDt3BeOgbj+3o=
-github.com/shu-go/gotwant v0.0.0-20190822031422-724391433f13/go.mod h1:UxvcvxZEQUBw6lS9UgXOPh1outjvx2+bvDlEOpCTuGo=
+github.com/shu-go/gotwant v0.0.0-20190920074605-851c8677556b h1:HZZDo+sGck6gpa2lzY9rLVuatZwm6Q7qr59R3fZTeIk=
+github.com/shu-go/gotwant v0.0.0-20190920074605-851c8677556b/go.mod h1:FZepfqvib0mXjHiaQPTv0RUD5QMpMA/FHLfBQjZRRQg=
+github.com/shu-go/shortcut v0.0.0-20191020015820-1e45a7167222 h1:oVXRnaN/c1RBgOJltnV0Vhy2THjhzZjnkD1vDHU7Qbo=
+github.com/shu-go/shortcut v0.0.0-20191020015820-1e45a7167222/go.mod h1:4yjiyfvkHtjGLzAyHOfECrlrIOBAYiu54PeRx5/EsXc=

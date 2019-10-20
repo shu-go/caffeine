@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"github.com/shu-go/gli"
+	"github.com/shu-go/shortcut"
 )
 
 // Version is app version
@@ -53,14 +54,35 @@ func (c globalCmd) Run(args []string) error {
 		return c.runStandalone()
 	}
 
-	src, err := os.Executable()
+	binpath, err := os.Executable()
 	if err != nil {
 		return fmt.Errorf("creating shortcut, executable: %v", err)
 	}
 	target := strings.Join(args, " ")
-	dst := filepath.Join(c.Dest, filepath.Base(target)) + ".lnk"
+	lnkpath := filepath.Join(c.Dest, filepath.Base(target))
 
-	return createShortcut(src, `run "`+target+`"`, dst, 7, target+",0")
+	s := shortcut.New(binpath)
+	var ss *shortcut.Shortcut
+	if strings.HasSuffix(strings.ToLower(target), ".lnk") {
+		ss, err = shortcut.Open(target)
+		if err != nil {
+			ss = nil
+		}
+	}
+	if ss != nil {
+		fmt.Printf("%v\n", *ss)
+		*s = *ss
+		s.Arguments = `run "` + ss.TargetPath + `"`
+		s.TargetPath = binpath
+	} else {
+		s.Arguments = `run "` + target + `"`
+		s.IconLocation = target + ",0"
+		lnkpath = lnkpath[:len(lnkpath)-len(filepath.Ext(lnkpath))]
+	}
+	s.WindowStyle = 7 // min
+	fmt.Printf("%v\n", *s)
+
+	return s.Save(lnkpath)
 }
 
 func (c globalCmd) runStandalone() error {
