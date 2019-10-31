@@ -28,11 +28,12 @@ var (
 )
 
 const (
-	ES_CONTINUOUS        = 0x80000000
-	ES_SYSTEM_REQUIRED   = 0x00000001
-	ES_DISPLAY_REQUIRED  = 0x00000002
-	ES_USER_PRESENT      = 0x00000004
-	ES_AWAYMODE_REQUIRED = 0x00000040
+	esContinuous      = 0x80000000
+	esSystemRequired  = 0x00000001
+	esDisplayRequired = 0x00000002
+	//unused
+	//esUserPresent      = 0x00000004
+	//esAwaymodeRequired = 0x00000040
 )
 
 type globalCmd struct {
@@ -89,7 +90,7 @@ func (c globalCmd) runStandalone() error {
 	signalChan := make(chan os.Signal, 1)
 	signal.Notify(signalChan, os.Interrupt)
 
-	setThreadExecutionState.Call(uintptr(ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED | ES_CONTINUOUS))
+	setThreadExecutionState.Call(uintptr(esSystemRequired | esDisplayRequired | esContinuous))
 
 	fmt.Println("Press Ctrl+C to stop.")
 
@@ -100,13 +101,13 @@ func (c globalCmd) runStandalone() error {
 				case <-signalChan:
 					break loop
 				case <-time.After(30 * time.Second):
-					setThreadExecutionState.Call(uintptr(ES_SYSTEM_REQUIRED | ES_DISPLAY_REQUIRED))
+					setThreadExecutionState.Call(uintptr(esSystemRequired | esDisplayRequired))
 				}
 			}
 	*/
 	<-signalChan
 
-	setThreadExecutionState.Call(uintptr(ES_CONTINUOUS))
+	setThreadExecutionState.Call(uintptr(esContinuous))
 
 	return nil
 }
