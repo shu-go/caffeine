@@ -116,11 +116,24 @@ func main() {
 	app.Name = "caffeine"
 	app.Desc = "keep waking Windows up"
 	app.Version = Version
-	app.Usage = `# standalone mode
-	caffeine
+	app.Usage = `RUN AS ADMINISTRATOR
+
+# standalone mode
+    # start
+    caffeine
+
+    # termination
+    Ctrl+C
 
 # shotcut-creation mode
-	caffeine PATH_TO_EXE`
+    # preparation
+    caffeine PATH_TO_EXE
+
+    # start
+    start the shortcut
+
+    # termination
+    terminate the app`
 	app.Copyright = "(C) 2019 Shuhei Kubota"
 	app.Run(os.Args)
 }
