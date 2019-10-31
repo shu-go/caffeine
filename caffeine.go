@@ -133,7 +133,7 @@ func main() {
     # termination
     terminate the app
 
-# shotcut-creation mode
+# shortcut-creation mode
     # preparation
     > ./caffeine PATH_TO_EXE
 
