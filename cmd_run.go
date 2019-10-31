@@ -7,6 +7,7 @@ import (
 )
 
 type runCmd struct {
+	_ struct{} `help:"wakes Windows up, then runs passed app and waits for it's termination, then allow Windows sleep"`
 }
 
 func (c *runCmd) Run(args []string) error {

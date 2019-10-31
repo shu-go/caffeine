@@ -121,14 +121,21 @@ func main() {
 
 # standalone mode
     # start
-    caffeine
+    > ./caffeine
 
     # termination
     Ctrl+C
 
+# app mode
+    # start
+    > ./caffeine run PATH_TO_EXE
+
+    # termination
+    terminate the app
+
 # shotcut-creation mode
     # preparation
-    caffeine PATH_TO_EXE
+    > ./caffeine PATH_TO_EXE
 
     # start
     start the shortcut
