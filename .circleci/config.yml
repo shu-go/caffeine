@@ -16,7 +16,7 @@ jobs:
       - run: echo 'export PATH=${GOPATH}/bin/:${PATH}' >> $BASH_ENV
       - checkout
       - run: go get -u  github.com/Songmu/goxz/cmd/goxz  github.com/tcnksm/ghr  github.com/akavel/rsrc
-      - run: rsrc -manifest caffeine.manifest -o caffein.syso
+      - run: rsrc -manifest manifest.xml -o manifest.syso
       - run: goxz -pv $(git describe --abbrev=0)  -os "windows"  -arch="386 amd64" -build-ldflags "-s -w -X main.Version=$(git describe --abbrev=0)" -include sample.bat
       - run: ghr -t $GITHUB_TOKEN  -u shu-go  --replace $(git describe --abbrev=0)  goxz/
 
