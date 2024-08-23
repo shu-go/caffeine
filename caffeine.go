@@ -39,8 +39,8 @@ const (
 type globalCmd struct {
 	DoRun runCmd `cli:"run,r"`
 
-	Timeout gli.Duration `cli:"t,timeout=DURATION" default:"-1s"`
-	Dest    string       `cli:"dest,d=PATH_TO_LNK" defdesc:"(default: dir of caffeine.exe)"`
+	Timeout time.Duration `cli:"t,timeout=DURATION" default:"-1s"`
+	Dest    string        `cli:"dest,d=PATH_TO_LNK" defdesc:"(default: dir of caffeine.exe)"`
 }
 
 func (c *globalCmd) Before(args []string) {
@@ -106,11 +106,11 @@ func (c globalCmd) runStandalone() error {
 				}
 			}
 	*/
-	if c.Timeout > gli.Duration(0) {
-		fmt.Println("timeout: " + c.Timeout.Duration().String())
+	if c.Timeout > time.Duration(0) {
+		fmt.Println("timeout: " + c.Timeout.String())
 
 		select {
-		case <-time.After(c.Timeout.Duration()):
+		case <-time.After(c.Timeout):
 		case <-signalChan:
 		}
 	} else {
