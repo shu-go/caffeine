@@ -1,6 +1,6 @@
 module github.com/shu-go/caffeine
 
-go 1.13
+go 1.23
 
 require (
 	github.com/shu-go/gli/v2 v2.3.0
